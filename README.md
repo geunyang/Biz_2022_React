@@ -2,6 +2,7 @@
 * nodejs.org 접속하여 nodejs 설치하기
 * 윈도우 cmd 를 관리자 권한으로 실행하기
 * vi 빠져나가기 :wq
+
 ## Nodejs 보조 도구들을 설치하기
 ### nodemon: 소스코드변경시 자동 재실행 도구
 * npm install -g nodemon
