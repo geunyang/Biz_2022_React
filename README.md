@@ -29,7 +29,7 @@
 
 ## 프로젝트 폴더에서 터미널 열기 실행하여 작업 준비
 * dependency 를 한번 더 새롭게 업데이트 하기
-* yarn 또는 npm install
+* yarn 또는 npm install 입력
 
 ## vsCode 에서 터미널 열기
 * 메뉴에서 터미널/새 터미널 열기를 선택하면 project root(workspace) 에서 터미널 열기 :  새로운 프로젝트를 생성하기 위한 터미널 열기
