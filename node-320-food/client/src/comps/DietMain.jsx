@@ -6,9 +6,11 @@
  * node 서버로 부터 데이터를 fetch(SELECT ALL) 하여
  * state 변수에 담는 코드가 작성될 곳
  */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import DietInput from "./DietInput";
 import DietList from "./DietList";
+import DietContext from "../context/DietContext";
+
 /**
  *
  * DB 에서 데이터들을 fetch 하여 List 를 보여줄 예정인데
@@ -86,8 +88,15 @@ const DietMain = () => {
   // DietList 와 DietInput 에게 params 에 담긴 데이터와 함수를 한꺼번에 전달하기
   return (
     <>
-      <DietList params={params} />
-      <DietInput params={params} />
+      {/* 
+      DietContext.jsx 파일에 Context 를 생성하고
+      Context 의 Provider 에게 params 에 담긴 변수와 함수들을 저장(Store) 
+      각각 개별 Component 에 전달했던 params 를 제거
+      */}
+      <DietContext.Provider value={params}>
+        <DietList />
+        <DietInput params={params} />
+      </DietContext.Provider>
     </>
   );
   // return (

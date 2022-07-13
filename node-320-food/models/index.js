@@ -1,37 +1,21 @@
-'use strict';
+import Sequelize from "sequelize";
+/** mysqlConfig 에서 export default 를 사용하여
+ * 변수를 export내보냈기 때문에
+ * 여기서 선언하는 config 변수는 {} 로 묶지 않는다
+ */
+import config from "../config/mysqlConfig.js";
+import initModels from "./init-models.js";
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  config
+);
+const db = initModels(sequelize);
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
-
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
-
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;
+/**
+ * export {변수들}
+ * 한개의 파일(모듈)에서 다수(2개 이상)의 변수(함수)를 내보낼때 사용하는 형식
+ */
+export { db, sequelize };

@@ -9,21 +9,26 @@ import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import mongoose from "mongoose";
-import { mongoURL } from "./config/mongoConfig.js";
 
-const dbConn = mongoose.connection;
-// once 최초 연결시 한번만 메세지 보여주기
-dbConn.once("open", () => {
-  console.log("MongoDB Open");
-});
-// on 오류 발생시 항상 감시
-dbConn.on("error", (err) => {
-  console.log(err);
-});
-
-mongoose.connect(mongoURL);
-
+/** import {변수들} from "파일"
+ *
+ * 다수의 변수(함수) 가 export 된 경우
+ * 필요한 변수(함수) 만 import 할 때
+ * 이때는 반드시 export 한 변수(함수) 와 같은 이름을 사용해야한다
+ */
+import { sequelize } from "./models/index.js";
+/**
+ * db sync : model 설정값에 따라 테이블 생성하기
+ * force : true 로 설정하면 project restart 될때 table drop 하고 다시 CREATE
+ */
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log("DB 연결");
+  })
+  .catch((err) => {
+    console.error("오류발생:", err);
+  });
 import foodRouter from "./routes/food.js";
 import usersRouter from "./routes/users.js";
 

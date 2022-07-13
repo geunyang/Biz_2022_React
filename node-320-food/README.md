@@ -33,14 +33,32 @@ npm install mysql2
 npm install sequelize
 npm install moment
 ```
-* Sequelize 도구 설치: 관리자 cmd 에서 반드시 global 로 설치
+
+* Sequelize 도구 설치: sql 문을 몰라도 사용할수 있게 도와주는 도구. 관리자 cmd 에서 반드시 global 로 설치
 ```
 npm install -g sequelize-cli
 npm install -g sequelize-auto
 npm install -g mysql2
 ```
+
 * Sequelize 도구를 사용하여 mysql DB 연동 정보 자동화 : 터미널
 ```
 sequelize init
 sequelize-auto -o "./models" -d mydb -h 127.0.0.1 -u username -x 'password' -e mysql -l esm
+```
+
+* sequelize 가 schema 자동생성 해줌
+* sequelize-auto 사용시 ```-l esm``` 옵션을 생략하면 CommonsJS(ES5 이전) 버전으로 모듈 생성
+* password 에 특문 포함시 반드시 작은따옴표''로 묶어야함 큰따옴표는 문자로 인식해 오류 발생
+* 선택사항들
+```
+-o 폴더 : model 설정 파일들이 출력될곳 (out)
+-d DB 명 : 사용할 mysql DB
+-h Host : MySQL 서버가 설치된 컴퓨터의 ip, localhost, 127.0.0.1
+-u username : MySQL 접속 권한이 있는 사용자 이름
+-x password : MySQL 사용자 비밀번호
+-e MySQL : 사용할 데이터베이스 소프트웨어(engine) 지정
+-l ems : ES6+ 버전으로 생성하기
+-l es5 : ES5 버전으로 생성하기
+-p PORTNUM : port 3306 외 다른 포트를 사용할 경우 지정
 ```

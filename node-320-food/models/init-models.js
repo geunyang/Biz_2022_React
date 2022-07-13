@@ -1,11 +1,11 @@
 import _sequelize from "sequelize";
 const DataTypes = _sequelize.DataTypes;
-import _tbl_ems from "./tbl_ems.js";
+import _tbl_food from "./tbl_food.js";
 
 export default function initModels(sequelize) {
-  const tbl_ems = _tbl_ems.init(sequelize, DataTypes);
+  const tbl_food = _tbl_food.init(sequelize, DataTypes);
 
   return {
-    tbl_ems,
+    tbl_food,
   };
 }
