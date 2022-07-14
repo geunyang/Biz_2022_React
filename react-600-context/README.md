@@ -1,70 +1,10 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# React Props Drilling
+* React Component 가 여러겹으로 감싸고 있을때, 상위 Component 에서 state 를 생성하고 그 state 를 사용하여 하위(child) component 들이 rendering 을 하거나 state 를 변경해야 하는 경우가 많다
+* 상위 Component 에서 여러겹의 하위 Component 로 state 를 전달할때 중간에 위치한 Component 들은 실제로 필요하지 않지만 부모 Component 로부터 props 로 받아서 자식 Component 에게 계속해서 props 를 toss 해야하는 경우가 발생
+* 이러한 drilling 현상을 방지하기 위하여 store 라는 개념이 생겨났다. Drilling 현상을 방지하기 위하여 기본 react 기능 외에  ```Redux``` ```mobx``` ```recoil``` 등의 3rd part LIB 를 사용한다
+* 3rd part LIB 들이 오히려 react 보다 학습하기 어려운 경우가 많다. 그래서 react 에서는 단지 store 기능만 수행하는 Context.Provider 라는 도구를 제공
+# React Context.Provider 를 사용하여 Drilling 문제 해결하기
+* 3rd part LIB 를 사용하여 Drilling 문제를 해결 할 수 있지만, 학습 곡선이 매우 커서 큰 프로젝트 외에는 오히려 불편 할 수 있다
+* 현재 React 에서는 Context.Provider 를 사용하여 일부 문제 해결 할 수 있으나 무분별하게 사용시 project 의 유지보수성이 떨어지는 문제 발생
+* 또한 React 버전이 올라갈수록 여러가지 문제가 해결되고 있어 경우에 따라 좋은 도구가 될 수 있다.
+* context-v0 에서는 일반적인 Drilling 이 적용되는 코드를 사용했고 context-v2 에서는 매우 간단하게 Context.Provider 를 적용해 코드를 작성한다
